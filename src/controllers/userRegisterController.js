@@ -60,6 +60,41 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+exports.getAllUsers = async (req, res) => {
+  try {
+    const Allusers = await userModel.getAllUsers();
+    res.status(200).json({
+      error: false,
+      message: "data fetched successfully......",
+      data: Allusers,
+    });
+  } catch (err) {
+    console.log("Error faetching users data:", err);
+    res.status(500).json({
+      error: true,
+      message: "Internal server Error",
+    });
+  }
+};
+
+exports.getAllUsersById = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const usersData = await userModel.getAllUsersById(userId);
+    res.status(200).json({
+      error: false,
+      message: "users fetches successfully.....",
+      data: usersData,
+    });
+  } catch (err) {
+    console.log("Error in fetching user", err);
+    res.status(500).json({
+      error: true,
+      message: "Internal server error",
+    });
+  }
+};
+
 exports.updateUser = async (req, res) => {
   const id = req.params.id;
   const usersData = req.body;

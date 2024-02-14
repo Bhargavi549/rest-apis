@@ -11,7 +11,7 @@ exports.registerUser = async ({
   creator_role,
   creator_password,
   creator_id,
-  management,
+  management
 }) => {
   try {
     const query =
@@ -43,6 +43,29 @@ exports.registerUser = async ({
       creator_id,
       management,
     };
+  } catch (err) {
+    throw err;
+  }
+};
+
+exports.getAllUsers = async () => {
+  try {
+    const query = "SELECT * FROM mydb1.user_accounts";
+    const rows = await connection.promise().query(query);
+    return rows;
+  } catch (err) {
+    throw err;
+  }
+};
+
+exports.getAllUsersById = async (userId) => {
+  try {
+    const query = "SELECT * FROM mydb1.user_accounts WHERE id = ?";
+    const rows = await connection.promise().query(query, [userId]);
+    if (rows.length === 0) {
+      throw new Error("User not found");
+    }
+    return rows[0];
   } catch (err) {
     throw err;
   }
