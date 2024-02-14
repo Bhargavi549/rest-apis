@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const registerRoute = require("./src/routes/index");
-app.use(express.json());
+const bodyparser = require("body-parser");
+app.use(bodyparser.json());
 
 app.use("/", registerRoute);
 

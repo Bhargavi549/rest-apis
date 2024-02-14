@@ -1,4 +1,4 @@
-const connection = require("../config.js/db");
+const connection = require("../config/db");
 
 exports.registerUser = async ({
   account_role,
