@@ -11,7 +11,7 @@ exports.registerUser = async ({
   creator_role,
   creator_password,
   creator_id,
-  management
+  management,
 }) => {
   try {
     const query =

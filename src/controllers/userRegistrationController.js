@@ -1,4 +1,4 @@
-const userModel = require("../models/userRegisterModel");
+const userModel = require("../models/userRegistrationModel");
 
 exports.registerUser = async (req, res) => {
   const {
@@ -49,13 +49,13 @@ exports.registerUser = async (req, res) => {
     res.status(200).json({
       error: false,
       message: "user Registered successfully",
-      data: accountDetails,
     });
   } catch (err) {
     console.log("Error registered user:", err);
     res.status(500).json({
       error: true,
       message: "Internal server Error",
+      data: accountDetails
     });
   }
 };
@@ -66,7 +66,7 @@ exports.getAllUsers = async (req, res) => {
     res.status(200).json({
       error: false,
       message: "data fetched successfully......",
-      data: Allusers,
+      //data: Allusers,
     });
   } catch (err) {
     console.log("Error faetching users data:", err);
@@ -84,13 +84,13 @@ exports.getAllUsersById = async (req, res) => {
     res.status(200).json({
       error: false,
       message: "users fetches successfully.....",
-      data: usersData,
     });
   } catch (err) {
     console.log("Error in fetching user", err);
     res.status(500).json({
       error: true,
       message: "Internal server error",
+      data: usersData,
     });
   }
 };
@@ -104,13 +104,13 @@ exports.updateUser = async (req, res) => {
     res.status(200).json({
       error: false,
       message: "User updated successfully",
-      data: userUpdateDetails,
     });
   } catch (err) {
     console.log("Error updating user:", err);
     res.status(500).json({
       error: true,
       message: "Internal server error",
+      data: userUpdateDetails,
     });
   }
 };
