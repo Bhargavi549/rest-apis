@@ -10,8 +10,10 @@ exports.registerUser = async (req, res) => {
     mobile_no,
     email,
     creator_role,
+    refferal_code,
     creator_password,
     creator_id,
+    country_name,
     management,
   } = req.body;
 
@@ -19,12 +21,8 @@ exports.registerUser = async (req, res) => {
     !(
       account_role ||
       user_name ||
-      first_name ||
-      last_name ||
       creator_id ||
-      password ||
-      creator_password ||
-      creator_role
+      password
     )
   ) {
     return res.status(400).json({
@@ -32,7 +30,17 @@ exports.registerUser = async (req, res) => {
       message: "All fields are Required",
     });
   }
+  const existingUser = await userModel.getUserName(user_name);
+  console.log("existingUser", existingUser);
+  if (existingUser) {
+    return res.status(400).send({
+      error: true,
+      message: "userName already exist",
+    });
+  }
+
   try {
+    const updatedManagement = creator_role;
     const accountDetails = await userModel.registerUser({
       account_role,
       user_name,
@@ -41,14 +49,17 @@ exports.registerUser = async (req, res) => {
       last_name,
       mobile_no,
       email,
+      country_name,
       creator_role,
       creator_password,
       creator_id,
+      refferal_code,
       management,
     });
     res.status(200).json({
       error: false,
       message: "user Registered successfully",
+      data: { updatedManagement, accountDetails },
     });
   } catch (err) {
     console.log("Error registered user:", err);

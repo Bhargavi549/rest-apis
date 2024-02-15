@@ -13,3 +13,17 @@ router.delete("/:id", userRegistrationController.deleteUser);
 router.post("/login", userLoginController.loginUser);
 
 module.exports = router;
+
+
+// const express = require('express');
+// const router = express.Router();
+// const HomeController = require('../controllers/HomeController');
+// const userRoutes = require('./userRoutes');
+
+// router.get('/', HomeController.index);
+
+
+// router.use('/users', userRoutes);
+
+// module.exports = router;
+
